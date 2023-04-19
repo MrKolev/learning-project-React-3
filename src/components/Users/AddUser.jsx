@@ -5,7 +5,7 @@ import styles from "./AddUser.module.css"
 import { UserList } from "./UsersList";
 
 
-export const AddUser = (props) => {
+export const AddUser = ({updateDta}) => {
 
     const [username, setUsername] = useState("")
     const [age, setAge] = useState("")
@@ -19,7 +19,8 @@ export const AddUser = (props) => {
             return
         };
         
-        
+        updateDta(username, age);
+
         setUsername("");
         setAge("");
 
