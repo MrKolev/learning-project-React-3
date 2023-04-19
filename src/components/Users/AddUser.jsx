@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "../UI/Button";
 import { Card } from "../UI/Card";
 import styles from "./AddUser.module.css"
+import { UserList } from "./UsersList";
 
 
 export const AddUser = (props) => {
@@ -41,6 +42,7 @@ export const AddUser = (props) => {
                 value={age} />
                 <Button type="submit" >Add User</Button>
             </form>
+            <UserList username={username} age={age} />
         </Card>
     )
 }
