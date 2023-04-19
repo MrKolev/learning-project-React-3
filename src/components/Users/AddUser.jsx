@@ -10,17 +10,35 @@ export const AddUser = (props) => {
     const [age, setAge] = useState("")
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(username);
-        console.log(age);
+        if (username.trim().length === 0 || age.trim().length === 0) {
+            return 
+        };
+        
+        if (+age < 1) {
+            return
+        };
+        
+        
+        setUsername("");
+        setAge("");
+
     }
 
     return (
         <Card className={styles.input}>
             <form onSubmit={onSubmit}>
                 <label htmlFor="username" >Usernam</label>
-                <input type="text" id="username" onChange={(e)=>setUsername(e.target.value)} />
+                <input
+                type="text" 
+                id="username" 
+                onChange={(e) => setUsername(e.target.value)}
+                value={username} />
                 <label htmlFor="age">Age (Years)</label>
-                <input type="number" id="age" onChange={(e)=>setAge(e.target.value)}/>
+                <input 
+                type="number" 
+                id="age" 
+                onChange={(e) => setAge(e.target.value)}
+                value={age} />
                 <Button type="submit" >Add User</Button>
             </form>
         </Card>
