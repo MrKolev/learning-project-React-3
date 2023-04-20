@@ -9,7 +9,7 @@ function App() {
   
   const updateDta = (name, age) => {
     setMyData((prevdata) => {
-      return [...prevdata, { name, age }];
+      return [...prevdata, { name, age, id: Math.random().toString() }];
     })
   }
   return (
