@@ -7,28 +7,41 @@ import { ErrorModal } from "../UI/ErrorModal";
 
 export const AddUser = ({updateDta}) => {
 
-    const [username, setUsername] = useState("")
-    const [age, setAge] = useState("")
-    const [message, setMessage] = useState("Something went wrong!")
+    const [username, setUsername] = useState("");
+    const [age, setAge] = useState("");
+    const [error, setError] = useState("")
+
     const onSubmit = (e) => {
         e.preventDefault();
         if (username.trim().length === 0 || age.trim().length === 0) {
-            return  setMessage("Fill in all the fields!")
+            setError({
+                title: "Invalid input!",
+                message: "Fill in all the fields!"
+            })
+            return 
         };
         
         if (+age < 1) {
-            return setMessage("Years cannot be a negative number")
+            setError({
+                title: "Invalid age!",
+                message: "Years cannot be a negative number"
+            })
+            return 
         };
         
         updateDta(username, age);
 
         setUsername("");
         setAge("");
-
     }
+    
+    const onConfirmF = () => { 
+        setError(null)
+     }
+
 
     return (<>
-        <ErrorModal title="An error has occurred!" message={message}/>
+        {error && <ErrorModal onConfirm={onConfirmF} title={error.title} message={error.message}/>}
         <Card className={styles.input}>
             <form onSubmit={onSubmit}>
                 <label htmlFor="username" >Usernam</label>
