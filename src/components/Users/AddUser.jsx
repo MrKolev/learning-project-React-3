@@ -9,7 +9,7 @@ export const AddUser = ({updateDta}) => {
 
     const [username, setUsername] = useState("");
     const [age, setAge] = useState("");
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -17,7 +17,7 @@ export const AddUser = ({updateDta}) => {
             setError({
                 title: "Invalid input!",
                 message: "Fill in all the fields!"
-            })
+            });
             return 
         };
         
@@ -25,7 +25,7 @@ export const AddUser = ({updateDta}) => {
             setError({
                 title: "Invalid age!",
                 message: "Years cannot be a negative number"
-            })
+            });
             return 
         };
         
@@ -36,7 +36,7 @@ export const AddUser = ({updateDta}) => {
     }
     
     const onConfirmF = () => { 
-        setError(null)
+        setError(null);
      }
 
 
