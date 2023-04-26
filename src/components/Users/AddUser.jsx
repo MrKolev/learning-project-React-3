@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "../UI/Button";
 import { Card } from "../UI/Card";
 import styles from "./AddUser.module.css"
@@ -6,14 +6,17 @@ import { ErrorModal } from "../UI/ErrorModal";
 
 
 export const AddUser = ({updateDta}) => {
+    const nameInputRef = useRef();
+    const ageInputRef = useRef();
 
-    const [username, setUsername] = useState("");
-    const [age, setAge] = useState("");
+
     const [error, setError] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (username.trim().length === 0 || age.trim().length === 0) {
+        const enterName = nameInputRef.current.value;
+        const enterAge = ageInputRef.current.value;
+        if (enterName.trim().length === 0 || enterAge.trim().length === 0) {
             setError({
                 title: "Invalid input!",
                 message: "Fill in all the fields!"
@@ -21,18 +24,18 @@ export const AddUser = ({updateDta}) => {
             return 
         };
         
-        if (+age < 1) {
+        if (+enterAge < 1) {
             setError({
                 title: "Invalid age!",
                 message: "Years cannot be a negative number"
             });
             return 
         };
+        nameInputRef.current.value = "";
+        ageInputRef.current.value = "";
         
-        updateDta(username, age);
+        updateDta(enterName, enterAge);
 
-        setUsername("");
-        setAge("");
     }
     
     const onConfirmF = () => { 
@@ -48,14 +51,12 @@ export const AddUser = ({updateDta}) => {
                 <input
                 type="text" 
                 id="username" 
-                onChange={(e) => setUsername(e.target.value)}
-                value={username} />
+                ref={nameInputRef} />
                 <label htmlFor="age">Age (Years)</label>
                 <input 
                 type="number" 
                 id="age" 
-                onChange={(e) => setAge(e.target.value)}
-                value={age} />
+                ref={ageInputRef} />
                 <Button type="submit" >Add User</Button>
             </form>
         </Card>

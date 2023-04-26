@@ -2,6 +2,7 @@ import styles from './ErrorModal.module.css'
 import { Card } from "./Card"
 import { Button } from './Button'
 import { Fragment } from 'react'
+import ReactDOM from 'react-dom'
 
  const Backdrop = ({ onConfirm }) => {
     return <div className={styles.backdrop} onClick={onConfirm} />
@@ -38,8 +39,11 @@ export const ErrorModal = ({ title, message, onConfirm }) => {
                     title={title}
                     message={message}
                     onConfirm={onConfirm} />,
-                document.getById("overlay-root"))
+                document.getElementById("overlay-root"))
             }
         </Fragment>
     )
 }
+
+var a = 10
+a= ++a;
